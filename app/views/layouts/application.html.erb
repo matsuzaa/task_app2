@@ -11,6 +11,22 @@
   </head>
 
   <body>
+    <header>
+      <%= render "shared/header" %>
+    </header>
+    
+    <!-- エラー発生時用記述 -->
+    <% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+
     <%= yield %>
+
+    <footer>
+      <p>© Rails.Test2</p>
+    </footer>
+    
+    <!-- debug,開発環境のみ表示 -->
+    <%= debug(params) if Rails.env.development? %>
   </body>
 </html>

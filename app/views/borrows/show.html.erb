@@ -1,0 +1,53 @@
+<h3>宿泊予約：<%= @borrow.name %></h3>
+
+<h4><%= link_to "物件情報ページに移動", @borrow.lend %></h4>
+<% unless @borrow.lend == nil %> 
+    <table>
+        <tr>
+            <th>住所</th>
+            <td><%= @borrow.lend.prefecture.name %> <%= @borrow.lend.address %></td>
+        </tr>
+        <tr>
+            <th>1泊/1人当たりの宿泊料</th>
+            <td><%= @borrow.lend.price.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+            <th>紹介文</th>
+            <td><%= @borrow.lend.content %></td>
+        </tr>
+    </table>
+<% else %>
+    <p>物件：<%= @borrow.name %> は削除されました</p>
+<% end %>
+
+<h3>予約内容</h3>
+<table class="over">
+    <tr>
+        <th>物件名</th>
+        <td><%= @borrow.name %></td>
+    </tr>
+    <tr>
+        <th>宿泊日</th>
+        <td><%= @borrow.start_day.to_s(:datetime_jp) %> 〜 <%= @borrow.end_day.to_s(:datetime_jp) %></td>
+    </tr>
+    <tr>
+        <th>宿泊人数</th>
+        <td><%= @borrow.peoples %>人</td>
+    </tr>
+    <tr>
+        <th>合計宿泊料</th>
+        <td><%= @borrow.total.to_s(:delimited) %>円</td>
+    </tr>
+</table>
+
+<div>
+    <ul>
+        <li><%= link_to "予約をキャンセル", @borrow, method: :delete, data: {confirm: "予約をキャンセルしますか？"} %></li>
+    </ul>
+</div>
+
+<div>
+    <ul>
+        <li><%= link_to "マイページに戻る", :user %></li>
+    </ul>
+</div>

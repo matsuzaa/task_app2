@@ -1,0 +1,50 @@
+<h3>貸し物件情報：<%= @lend.name %></h3>
+
+<table>
+    <tr>
+        <th>住所</th>
+        <td><%= @lend.prefect %> <%= @lend.address %></td>
+    </tr>
+    <tr>
+        <th>1泊/1人当たりの宿泊料</th>
+        <td><%= @lend.price.to_s(:delimited) %></td>
+    </tr>
+    <tr>
+        <th>紹介文</th>
+        <td><%= @lend.content %></td>
+    </tr>
+</table>
+
+<div>
+    <% if @lend.images.attached? %>
+        <div class="lend_image2">
+            <% @lend.images.each do |image| %>
+                <%= image_tag image, width: 300, height: 250 %>
+            <% end %>
+        </div>
+    <% end %>
+</div>
+
+<!-- 作成ユーザのみ編集ボタン表示 -->
+<div>
+    <%= link_to "物件情報を編集する", edit_lend_path(@lend) if lend_user?(@user) %>
+</div>
+<% if lend_user?(@user) || current_user.admin? %>       <!-- 作成ユーザまたはadminのみ予約一覧・削除ボタン表示 -->
+    <div class="pad">
+        <%= render "shared/lend_borrows" %>
+    </div>
+    <div class="pad">
+        <%= link_to "物件を削除", @lend, method: :delete, data: {confirm: "本当に削除しますか？"} %>
+    </div>
+<% end %>
+<!-- 作成ユーザ以外の場合予約ボタン表示 -->
+<div>
+    <%= link_to "宿泊予約", :new_borrow unless lend_user?(@user) %>
+</div>
+
+<div class="pad">
+    <ul>
+        <li><%= link_to "マイページに戻る", :user %></li>
+    </ul>
+</div>
+

@@ -1,0 +1,24 @@
+<h3>予約確認</h3>
+
+<dl>
+    <dt>予約物件</dt>
+    <dd><%= @borrow.name %></dd>
+    <dt>予約日程</dt>
+    <dd><%= @borrow.start_day.to_s(:datetime_jp) %> 〜 <%= @borrow.end_day.to_s(:datetime_jp) %></dd>
+    <td> </td>
+    <dd><%= @borrow.stay %>泊（1人当たりの宿泊料：<%= people_total %>円）</dd>
+    <td>宿泊人数</td>
+    <dd><%= @borrow.peoples %></dd>
+    <td>合計宿泊料金</td>
+    <dd><%= @borrow.total %>円</dd>
+</dl>
+
+<%= form_with url: borrows_back_path do |f| %>
+    <%= f.submit "入力画面に戻る" %>
+<% end %>
+
+<div class="submit">
+    <%= form_with model: @borrow do |f| %>
+        <%= f.submit "予約する", class: "button big" %>
+    <% end %>
+</div>
