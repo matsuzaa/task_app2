@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   post 'users/complete'   #ユーザ登録完了画面
   post 'borrows/confirm'   #予約確認画面
   post 'borrows/back'   #確認画面から予約画面に戻る
-  post 'lends/search'   #検索画面
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #ログインセッション用
   get '/login' => 'sessions#new'
