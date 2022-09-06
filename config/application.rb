@@ -18,5 +18,10 @@ module TaskApp2
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.action_controller.permit_all_parameters = true   #追記
+    config.time_zone = 'Tokyo'    #追記
+    config.i18n.default_locale = :ja
+    #追記、ActiveStorageの上書きを無効
+    config.active_storage.replace_on_assign_to_many = false
   end
 end

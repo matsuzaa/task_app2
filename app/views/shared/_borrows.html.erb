@@ -1,0 +1,25 @@
+<article class="article">
+    <h3>宿泊予約一覧</h3>
+
+    <table class="over">
+        <thead>
+            <tr>
+                <th>物件名</th>
+                <th>宿泊日</th>
+                <th>宿泊人数</th>
+                <th>合計宿泊料</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% user_borrow.each do |borrow| %>
+                <tr>
+                    <td class="over"><%= link_to borrow.name, borrow %></td>
+                    <td class="over"><%= borrow.start_day.to_s(:datetime_jp) %> 〜 <%= borrow.end_day.to_s(:datetime_jp) %></td>
+                    <td class="over"><%= borrow.peoples %>人</td>
+                    <td class="over"><%= borrow.total.to_s(:delimited) %>円</td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</article>
+

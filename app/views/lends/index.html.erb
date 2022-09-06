@@ -1,0 +1,34 @@
+<h3>貸し物件一覧</h3>
+
+<!-- 検索機能 -->
+<%= search_form_for @q do |f| %>
+    <%= f.label :prefect_cont, "都道府県で検索" %>
+    <%= f.search_field :prefect_cont %>
+    <%= f.label :name_or_prefect_or_address_or_price_or_content_cont, "フリーワード検索" %>
+    <%= f.search_field :name_or_prefect_or_address_or_price_or_content_cont %>
+    <%= f.submit "検索" %>
+<% end %>
+
+<table>
+    <thead>
+        <tr>
+            <th>タイトル</th>
+            <th>都道府県</th>
+            <th>1泊1人の価格</th>
+            <th>紹介文</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @lends.each do |lend| %>
+            <tr>
+                <td><%= link_to lend.name, lend, class: "over" %></td>
+                <td><%= lend.prefect %></td>
+                <td><%= lend.price %></td>
+                <td class="over"><%= lend.content %></td>
+                <span class="hidden"><%= lend.address %></span>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<p><%= link_to "TOPに戻る", :inns %></p>

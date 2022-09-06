@@ -1,0 +1,31 @@
+<% provide(:title, "ログイン") %>
+<h1>ログイン</h1>
+
+<div>
+    <div>
+        <%= form_for(:session, url: login_path) do |f| %>
+            <table>
+                <tr>
+                    <th><%= f.label :email %></th>
+                    <td><%= f.email_field :email, placeholder: "メールアドレスを入力してください", size: 32 %></td>
+                </tr>
+                <tr>
+                    <th><%= f.label :password %></th>
+                    <td><%= f.password_field :password, placeholder: "パスワードを入力してください", size: 32 %></td>
+                </tr>
+            </table>
+
+            <!-- ログイン状態を維持するチェックボックス作成 -->
+            <div>
+                <%= f.label :remember_me, class: "checkbox inline" do %>
+                    <%= f.check_box :remember_me %>
+                    <span>ログイン状態を保持する</span>
+                <% end %>
+            </div>
+
+            <%= f.submit "ログイン", class: "button submit" %>
+        <% end %>
+
+        <p> 利用が初めての方 <%= link_to "アカウントを新規作成", :new_user %></p>
+    </div>
+</div>

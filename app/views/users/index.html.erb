@@ -1,0 +1,32 @@
+<h3>登録ユーザ一覧</h3>
+
+<%= will_paginate @users, renderer: WillPaginate::ActionView::LinkRenderer %>
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>アイコン</th>
+            <th>名前</th>
+            <th>メールアドレス</th>
+            <th>パスワード</th>
+            <th>自己紹介</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @users.each do |user| %>
+            <tr>
+                <td><%= link_to user.id, user %></td>
+                <td><%= image_tag user.icon, size: '50x50' if user.icon.attached? %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.password_digest %></td>    <!-- ハッシュ値が表示 -->
+                <td><%= user.introduction %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<%= will_paginate @users, renderer: WillPaginate::ActionView::LinkRenderer %>
+
+<p><%= link_to "TOPに戻る", :inns %></p>
+

@@ -7,6 +7,8 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import 'bootstrap';      // 追記
+import '../stylesheets/application';        // 追記
 
 Rails.start()
 Turbolinks.start()

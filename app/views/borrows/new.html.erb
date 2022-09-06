@@ -1,0 +1,56 @@
+<h3>予約画面</h3>
+
+<%= render "shared/error", obj: @borrow, class:"error_text" %>
+
+<!-- 物件確認表示 -->
+<table>
+    <tr>
+        <th class="conf">予約物件</th>
+        <td class="conf2"><%= @lend.name %></td>
+    </tr>
+    <tr>
+        <th class="conf">住所</th>
+        <td class="conf2"><%= @lend.prefecture.name %> <%= @lend.address %></td>
+    </tr>
+    <tr>
+        <th class="conf">1泊/1人当たりの宿泊料</th>
+        <td class="conf2"><%= @lend.price.to_s(:delimited) %></td>
+    </tr>
+    <tr>
+        <th class="conf">紹介文</th>
+        <td class="conf2"><%= @lend.content %></td>
+    </tr>
+</table>
+
+<!-- 入力項目 -->
+<%= form_with url: borrows_confirm_path do |f| %>
+    <table>
+        <tr>
+            <th><%= f.label :start_day, "チェックイン" %></th>
+            <td><%= f.date_select :start_day %></td>
+        </tr>
+        <tr>
+            <th><%= f.label :end_day, "チェックアウト" %></th>
+            <td><%= f.date_select :end_day %></td>
+        </tr>
+        <tr>
+            <th><%= f.label :peoples, "宿泊人数" %></th>
+            <td><%= f.select :peoples, [[1],[2],[3],[4],[5],[6],[7],[8]] %></td>
+        </tr>
+    </table>
+
+    <!-- name,user_id,lend_id はバックグラウンドで自動入力 -->
+    <%= f.hidden_field :name, value: @lend.name %>
+    <%= f.hidden_field :user_id, value: @user.id %>
+    <%= f.hidden_field :lend_id, value: @lend.id %>
+
+    <div class="submit">
+        <%= f.submit "予約内容確認",class: "button big" %>
+    </div>
+    <div>
+        <ul>
+            <li><%= link_to "物件情報に戻る", @lend %></li>
+        </ul>
+    </div>    
+<% end %>
+

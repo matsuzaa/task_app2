@@ -1,0 +1,26 @@
+<article class="article">
+    <h3>登録貸し物件一覧</h3>
+
+    <table class="over">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>住所</th>
+                <th>価格</th>
+                <th>紹介文</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% user_lend.each do |lend| %>
+                <tr>
+                    <td class="over"><%= link_to lend.name, lend %></td>
+                    <td class="over"><%= lend.prefect %> <%= lend.address %></td>
+                    <td class="over"><%= lend.price.to_s(:delimited) %></td>
+                    <td class="over"><%= lend.content %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+    <%= link_to "新規貸出物件の登録", :new_lend, class: "link" %>
+</article>

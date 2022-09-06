@@ -1,0 +1,24 @@
+<!-- ヘッダ左 -->
+<div>
+    <p><%= link_to "TOPに戻る", :inns, class: "link" %></p>
+</div>
+
+<!-- ヘッダ右 -->
+<div>
+    <ul>
+        <% if logged_in? %>     <!-- ログイン中表示 -->
+            <li><%= link_to_unless_current "登録ユーザの確認", :users, class: "link" %></li>
+            <li><%= link_to_unless_current "登録貸し出し物件の確認", :lends, class: "link" %></li>
+            <li class="dropdown">   <!-- ドロップダウンメニュー -->
+                <a href="#" class="dropdown-toggle link" data-toggle="dropdown"><%= current_user.name %>さん<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><%= link_to_unless_current "マイページ", current_user, class: "link" %></li>
+                    <li><%= link_to "ログアウト", logout_path, method: :delete, class:"link" %></li>
+                </ul>
+            </li>
+        <% else %>      <!-- 未ログイン時表示 -->
+            <li><%= link_to_unless_current "新規ユーザー登録", :new_user, class: "link" %></li>
+            <li><%= link_to "ログイン", login_path, class: "link" %></li>
+        <% end %>
+    </ul>
+</div>

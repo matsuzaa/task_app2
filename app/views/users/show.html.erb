@@ -1,0 +1,60 @@
+<h3><%= @user.name %>さん のページ</h3>
+
+<%= form_with model: @user do |f| %>
+    <table>
+        <tr>
+            <th><%= f.label :icon, "アイコン" %></th>
+            <td>
+                <%= image_tag @user.icon, size: '250x250' if @user.icon.attached? %><br>
+                <% if current_user?(@user) %>
+                    <%= f.file_field :icon %>
+                    <%= f.submit "選択したアイコンに更新", class: "button" %>
+                <% end %>
+            </td>
+        </tr>
+        <tr>
+            <th>名前</th>
+            <td><%= @user.name %></td>
+        </tr>
+        <tr>
+            <th>メールアドレス</th>
+            <td><%= @user.email %></td>
+        </tr>
+        <% if current_user?(@user) %>
+                <tr>
+                    <th>
+                        <%= f.label :introduction, "自己紹介" %>
+                        <div class="submit">
+                            <%= f.submit "自己紹介を更新", class:"button" %>
+                        </div>   
+                    </th>
+                    <td><%= f.text_area :introduction, size: "32x10", placeholder: "200文字以内で入力してください。" %></td>
+                </tr>
+        <% else %>
+            <th>自己紹介</th>
+            <td><%= @user.introduction %></td>
+        <% end %>
+    </table>
+<% end %>
+
+<!-- 該当ユーザがログイン中のみ編集ボタン表示 -->
+<div class="link">
+    <%= link_to "登録情報を編集する", edit_user_path(current_user) if current_user?(@user) %>
+</div>
+
+<div class="pad">
+    <%= render "shared/lends" %>
+</div>
+<div class="pad">
+    <%= render "shared/borrows" %>
+</div>
+
+<div>
+    <ul>
+        <% if current_user?(@user) || current_user.admin? %>       <!-- 該当ユーザまたはadminのみ削除ボタン表示 -->
+            <li><%= link_to "アカウントを削除", @user, method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
+        <% end %>
+        <li><%= link_to "トップ画面に戻る", :inns %></li>
+    </ul>
+</div>
+

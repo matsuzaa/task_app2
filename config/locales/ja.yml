@@ -1,0 +1,14 @@
+ja:
+ activerecord:
+  models:
+   inn: 物件情報
+   user: ユーザー
+  attributes:
+   inn:
+   user:
+    name: 名前
+    email: メールアドレス
+    password_digest: パスワード
+    password: パスワード
+    password_confirmation: パスワードの確認
+    introduction: 自己紹介
